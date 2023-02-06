@@ -1,0 +1,29 @@
+name: Deploy Images to ghcr
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-push-image:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: './'
+    steps:
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@main
+
+      - name: 'Login to GitHub Container Registry'
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{github.actor}}
+          password: ${{secrets.GITHUB_TOKEN}}
+
+      - name: 'Build + Push Image'
+        run: |
+          docker build -t ghcr.io/beeceej/example-service-docker-ec2:${GITHUB_SHA::7} .
+          docker push ghcr.io/beeceej/example-service-docker-ec2:${GITHUB_SHA::7}

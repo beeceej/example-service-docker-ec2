@@ -4,6 +4,5 @@ WORKDIR /go/delivery
 
 COPY . .
 RUN go build cmd/main.go
-ENTRYPOINT [ "/bin/sh", "-c" ]
 CMD [ "./main" ]
 
