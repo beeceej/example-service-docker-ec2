@@ -26,4 +26,6 @@ jobs:
       - name: 'Build + Push Image'
         run: |
           docker build -t ghcr.io/beeceej/example-service-docker-ec2:${GITHUB_SHA::7} .
+          docker tag ghcr.io/beeceej/example-service-docker-ec2:${GITHUB_SHA::7} ghcr.io/beeceej/example-service-docker-ec2:latest
           docker push ghcr.io/beeceej/example-service-docker-ec2:${GITHUB_SHA::7}
+          docker push ghcr.io/beeceej/example-service-docker-ec2:latest
