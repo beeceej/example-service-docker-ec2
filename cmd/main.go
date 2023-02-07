@@ -8,7 +8,7 @@ import (
 func main() {
 	mux := http.DefaultServeMux
 	mux.HandleFunc("/hello-world", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprint(w, "Hello World!")
+		fmt.Fprint(w, "Hello World(V2)!")
 	})
 	err := http.ListenAndServe(":8000", mux)
 	if err != nil {
